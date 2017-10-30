@@ -7,7 +7,7 @@
  */
 public interface FileCryptoInterface
 {
-    File fileEncryptor(File file, String encryptKey); //Used to encrypt the file with a specific key
+    File fileEncryptor(File file, String encryptKey, String algorithm); //Used to encrypt the file with a specific key
 
-    File fileDecryptor(File file, String decryptKey); //Used to decrypt the file with a specific key
+    File fileDecryptor(File file, String decryptKey, String algorithm); //Used to decrypt the file with a specific key
 }
