@@ -9,5 +9,5 @@ import javax.swing.*;
  */
 public class CryptView extends JFrame
 {
-
+    private CryptModel c_model;
 }

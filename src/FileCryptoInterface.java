@@ -5,7 +5,7 @@
  *
  * This interface lays out our Strategy Pattern for file encryption and decryption.
  */
-public interface Encryption
+public interface FileCryptoInterface
 {
     File fileEncryptor(File file, String encryptKey); //Used to encrypt the file with a specific key
 
