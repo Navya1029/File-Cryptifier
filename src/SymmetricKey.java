@@ -1,18 +1,12 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.nio.file.Files;
-import java.security.Key;
-import java.security.MessageDigest;
+import javax.crypto.*;
+import java.security.*;
 import java.util.Arrays;
-
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-
-import sun.misc.BASE64Decoder;
+import java.io.*;
+import java.security.MessageDigest;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/2/17
+ * @Date Updated: 10/30/17
  * @Model_Used: Strategy
  *
  * This is used for Symmetric Key. The plan is to have the user be able to choose what type of encryption / decryption
@@ -20,57 +14,78 @@ import sun.misc.BASE64Decoder;
  */
 public class SymmetricKey implements FileCryptoInterface
 {
-
-    @Override
-    public File fileEncryptor(File file, String algorithm, StoredKeys keys)
-    {
-    		File tempFile = new File("AES-Encrypted");
-
-    		try 
-    		{
-    			//This is the type of cipher we will use
-				Cipher c = Cipher.getInstance("AES");
-
-				//Takes the key and converts it to something we can use to encode
-				byte[] key = keys.getSymmetricKey().getBytes("UTF-8");
-				MessageDigest sha = MessageDigest.getInstance("SHA-1");
-				key = sha.digest(key);
-				key = Arrays.copyOf(key, 16);
-
-				SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
-
-				//Creates the cipher in encrypt mode using this key
-				c.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-
-				//Encrypts the files bytes
-				byte[] cipherText = c.doFinal(Files.readAllBytes(file.toPath()));
-
-				StringBuffer sb = new StringBuffer(); //A string buffer
-				for(int i = 0; i < cipherText.length; i++)
-				{
-					sb.append(Integer.toString((cipherText[i] & 0xff) + 0x100, 16).substring(1)); //puts the encrypted stuff in the buffer
-				}
-
-				FileWriter fw = new FileWriter(tempFile); //Writes files
-				fw.write(sb.toString()); //writes to file
-				fw.close(); //Closes the file
-		} catch (Exception e) { System.out.println("AES Encryption Failed"); }
-		
-        return tempFile; //Needs to be changed
+    private Key generateKeyFromString(final String secKey) throws Exception {
+        final byte[] keyVal = new BASE64Decoder().decodeBuffer(secKey);
+        final Key key = new SecretKeySpec(keyVal, "DES");
+        return key;
     }
 
     @Override
-    public File fileDecryptor(File file, String algorithm, StoredKeys keys)
+    public File fileEncryptor(File file, String encryptKey, String algorithm)
+    {
+        File tempFile = new File("DESEncrypt.txt");
+        PrintWriter writer = new PrintWriter("DESEncrypt.txt", "UTF8");
+        try
+        {
+
+            final Cipher c = Cipher.getInstance("DES");
+            String text=new String(); //creates new string object
+            byte[] plainText = text.getBytes("UTF8"); //creates plainText
+
+
+
+            Key key = generateKeyFromString("TEST"); //creates key
+            writer.println(key);
+
+            //Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding"); //DES object create
+            //writer.println( "\n" + cipher.getProvider().getInfo() ); // Print Out
+
+            c.init(Cipher.ENCRYPT_MODE, key); //Encripting
+            byte[] cipherText = cipher.doFinal(plainText); // Encripting using key
+
+            writer.println( "Finish encryption: " );
+            writer.println(new String(cipherText, "UTF8"));//retruns new encrypted object
+            writer.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("DES failed");
+        }
+        return tempFile;
+    }
+    /*public File DESencryption(File file) throws Exception
+    {
+        File tempFile = new File("DESEncrypt.txt");
+        PrintWriter writer = new PrintWriter("DESEncrypt.txt", "UTF8");
+        try
+        {
+            String text=new String(); //creates new string object
+            byte[] plainText = text.getBytes("UTF8"); //creates plainText
+
+            KeyGenerator keyGen = KeyGenerator.getInstance("DES"); //genterates instance of key
+            keyGen.init(56); //DES key size
+            Key key = keyGen.generateKey(); //creates key
+
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding"); //DES object create
+            writer.println( "\n" + cipher.getProvider().getInfo() ); // Print Out
+
+            cipher.init(Cipher.ENCRYPT_MODE, key); //Encripting
+            byte[] cipherText = cipher.doFinal(plainText); // Encripting using key
+
+            writer.println( "Finish encryption: " );
+            writer.println(new String(cipherText, "UTF8"));//retruns new encrypted object
+            writer.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("DES failed");
+        }
+        return tempFile;
+    }*/
+
+    @Override
+    public File fileDecryptor(File file, String decryptKey, String algorithm)
     {
         return null; //Needs to be changed
     }
-    
-    private Key generateKeyFromString(final String secKey) throws Exception
-	{
-		final byte[] keyVal = new BASE64Decoder().decodeBuffer(secKey);
-		System.out.println(keyVal);
-		final Key key = new SecretKeySpec(keyVal, "AES");
-		System.out.println(key);
-		return key;
-	}
 }
