@@ -31,7 +31,7 @@ public class SymmetricKey implements FileCryptoInterface
     			//This is the type of cipher we will use
 				Cipher c = Cipher.getInstance("AES");
 
-				//Takes the key and converts it to something we can use to decode
+				//Takes the key and converts it to something we can use to encode
 				byte[] key = keys.getSymmetricKey().getBytes("UTF-8");
 				MessageDigest sha = MessageDigest.getInstance("SHA-1");
 				key = sha.digest(key);
@@ -48,7 +48,7 @@ public class SymmetricKey implements FileCryptoInterface
 				StringBuffer sb = new StringBuffer(); //A string buffer
 				for(int i = 0; i < cipherText.length; i++)
 				{
-					sb.append(Integer.toString((cipherText[i] & 0xff) + 0x100, 16).substring(1)); //puts the decrypted stuff in the buffer
+					sb.append(Integer.toString((cipherText[i] & 0xff) + 0x100, 16).substring(1)); //puts the Encrypted stuff in the buffer
 				}
 
 				FileWriter fw = new FileWriter(tempFile); //Writes files
@@ -69,7 +69,7 @@ public class SymmetricKey implements FileCryptoInterface
 			//This is the type of cipher we will use
 			Cipher c = Cipher.getInstance("AES");
 
-			//Takes the key and converts it to something we can use to encode
+			//Takes the key and converts it to something we can use to decode
 			byte[] key = keys.getSymmetricKey().getBytes("UTF-8");
 			MessageDigest sha = MessageDigest.getInstance("SHA-1");
 			key = sha.digest(key);
@@ -80,13 +80,13 @@ public class SymmetricKey implements FileCryptoInterface
 			//Creates the cipher in decrypt mode using this key
 			c.init(Cipher.DECRYPT_MODE, secretKeySpec);
 
-			//Encrypts the files bytes
+			//Decrypts the files bytes
 			byte[] cipherText = c.doFinal(Files.readAllBytes(file.toPath()));
 
 			StringBuffer sb = new StringBuffer(); //A string buffer
 			for(int i = 0; i < cipherText.length; i++)
 			{
-				sb.append(Integer.toString((cipherText[i] & 0xff) + 0x100, 16).substring(1)); //puts the encrypted stuff in the buffer
+				sb.append(Integer.toString((cipherText[i] & 0xff) + 0x100, 16).substring(1)); //puts the decrypted stuff in the buffer
 			}
 
 			FileWriter fw = new FileWriter(tempFile); //Writes files
