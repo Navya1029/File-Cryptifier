@@ -72,6 +72,11 @@ public class CryptModel
         return windowToUse;
     }
 
+    public void setWindowToUse(String window)
+    {
+        windowToUse = window;
+    }
+
     /**
      * Method used to decrypt the file and uses the strategy put in place
      *
