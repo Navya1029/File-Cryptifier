@@ -89,7 +89,7 @@ public class CryptModel
      */
     public void decryptFile(String algorithm)
     {
-        outFile = strategy.fileDecryptor(inFIle, algorithm, sk);
+        outFile = strategy.fileDecryptor(inFile, algorithm, sk);
     }
     
     /**
