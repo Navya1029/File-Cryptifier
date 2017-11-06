@@ -14,7 +14,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * @Authors Tyler, Matt, Daniel
- * @Date_Updated 11/3/17
+ * @Date_Updated 11/6/17
  * @Model_Used Singleton
  * 
  * This is a class used to keep track of the keys. This will make it so the encryption and decryption classes
