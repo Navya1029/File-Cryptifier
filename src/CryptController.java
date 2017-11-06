@@ -10,4 +10,21 @@ public class CryptController
 {
     private CryptModel model;
     private CryptView   view;
+
+    /**
+     * Constructor to setup MVC
+     */
+    public CryptController()
+    {
+        model = new CryptModel();
+        view  = new CryptView(model);
+    }
+
+    /**
+     * Method that updates the view of CryptView
+     */
+    public void updateView()
+    {
+        view.update();
+    }
 }
