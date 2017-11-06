@@ -16,12 +16,15 @@ public class CryptModel
 {
     //Holds the strategy to be used for Encryption or Decryption
     FileCryptoInterface strategy;
-    
+
     //What window to use for the proper info
     String windowToUse;
-    
+
     //Used for the keys
     StoredKeys sk = StoredKeys.getInstance();
+
+    //File initialization
+    File inFile, outFile, keyPublic, keyPrivate;
 
     /**
      * Method that assigns default strategy
@@ -68,31 +71,25 @@ public class CryptModel
     {
         return windowToUse;
     }
-    
-    /**
-     * Method used to encrypt the file and uses the strategy put in place
-     * 
-     * @param file (input file)
-     * @param algorithm (not currently used)
-     * @param keys (the keys for encryption and decryption)
-     * @return file (output file)
-     */
-    public File encryptFile(File file, String algorithm, StoredKeys keys)
-    {
-        return strategy.fileEncryptor(file, algorithm, keys);
-    }
-    
+
     /**
      * Method used to decrypt the file and uses the strategy put in place
-     * 
-     * @param file (input file)
+     *
      * @param algorithm (not currently used)
-     * @param keys (the keys for encryption and decryption)
-     * @return file (output file)
      */
-    public File decryptFile(File file, String algorithm, StoredKeys keys)
+    public void encryptFile(String algorithm)
     {
-        return strategy.fileDecryptor(file, algorithm, keys);
+        outFile = strategy.fileEncryptor(inFile, algorithm, sk);
+    }
+
+    /**
+     * Method used to encrypt the file and uses the strategy put in place
+     *
+     * @param algorithm (not currently used)
+     */
+    public void decryptFile(String algorithm)
+    {
+        outFile = strategy.fileDecryptor(inFIle, algorithm, sk);
     }
     
     /**
@@ -107,23 +104,63 @@ public class CryptModel
     
     /**
      * Method that stores the public key to the one the user specifies
-     * 
-     * @param file (input file)
+     *
      * @throws Exception (If things go wrong)
      */
-    public void setPublicKey(File file) throws Exception
+    public void setPublicKey(File key) throws Exception
     {
-        sk.getPublicFromFile(file.getAbsolutePath());
+        keyPublic = key;
+        sk.getPublicFromFile(keyPublic.getAbsolutePath());
     }
     
     /**
      * Method that stores the private key to the one the user specifies
      * 
-     * @param file (input file)
      * @throws Exception (If things go wrong)
      */
-    public void setPrivateKey(File file) throws Exception
+    public void setPrivateKey(File key) throws Exception
     {
-        sk.getPublicFromFile(file.getAbsolutePath());
+        keyPrivate = key;
+        sk.getPublicFromFile(keyPrivate.getAbsolutePath());
+    }
+
+    /**
+     * Method that returns public key
+     *
+     * @return file (public key)
+     */
+    public File getPublic()
+    {
+        return keyPublic;
+    }
+
+    /**
+     * Method that returns private key
+     *
+     * @return file (private key)
+     */
+    public File getPrivate()
+    {
+        return keyPrivate;
+    }
+
+    /**
+     * Method that sets the output file for the encryption or decryption
+     *
+     * @param filePath (Path of file)
+     */
+    public void setOutFile(String filePath)
+    {
+        outFile = new File(filePath);
+    }
+
+    /**
+     * Method that sets the input file for the encryption or decryption
+     *
+     * @param inFile (input file)
+     */
+    public void setInFile(File inFile)
+    {
+        this.inFile = inFile;
     }
 }
