@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/6/17
+ * @Date Updated: 11/7/17
  * @Model_Used: Model-View-Controller
  *
  * The controller interprets the mouse and keyboard inputs from the user,
@@ -45,5 +45,32 @@ public class CryptController implements ActionListener
             updateView();
         }
         //Add other statements to account for other button clicks
+      else if(e.getSource() == view.inputChooserButton) //Input Button
+        {
+            model.setWindowToUse("In File");
+            updateView();
+        }
+        else if(e.getSource() == view.outputChooserButton)//Output button
+        {
+            model.setWindowToUse("Out File");
+            updateView();
+        }
+        else if(e.getSource() == view.encrypt)//Encrypt
+        {
+            model.setWindowToUse("encrypt");
+            updateView();
+        }
+        else if(e.getSource() == view.decrypt) //Decrypt
+        {
+            model.setWindowToUse("decrypt");
+            updateView();
+        }
+        else if(e.getSource() == view.generateKeys)//Generate keys button
+        {
+            model.setWindowToUse("Generate Keys:");
+            updateView();
+        }
+
     }
 }
+
