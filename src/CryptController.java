@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/7/17
+ * @Date Updated: 11/13/17
  * @Model_Used: Model-View-Controller
  *
  * The controller interprets the mouse and keyboard inputs from the user,
@@ -34,17 +34,17 @@ public class CryptController implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == view.symmetric)
+        if (e.getSource() == view.symmetric)  //Symetric key Button
         {
             model.setWindowToUse("Symmetric");
             updateView();
         }
-        else if (e.getSource() == view.asymmetric)
+        else if (e.getSource() == view.asymmetric) //Asymetric Key button
         {
             model.setWindowToUse("Asymmetric");
             updateView();
         }
-        //Add other statements to account for other button clicks
+
       else if(e.getSource() == view.inputChooserButton) //Input Button
         {
             model.setWindowToUse("In File");
