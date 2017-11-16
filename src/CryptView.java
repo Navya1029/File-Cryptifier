@@ -59,6 +59,7 @@ public class CryptView
 	
 	JPanel container;
 	JFrame frame;
+	JFrame chooserFrame;
 	
 	public void init()
 	{
@@ -133,6 +134,8 @@ public class CryptView
 	    frame.setLocationRelativeTo(null);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setVisible(true);
+
+	    chooserFrame = new JFrame();
 	}
     /**
      * Constructor that gets the model from the Controller
@@ -162,7 +165,7 @@ public class CryptView
 			container.revalidate();
 			container.repaint();
         }
-        else
+        else if (model.getWindowToUse().equals("Asymmetric"))
         {
 			Component[] components = container.getComponents();
 			for (int i = 0; i < components.length; i++)
@@ -175,5 +178,25 @@ public class CryptView
 			container.revalidate();
 			container.repaint();
         }
+        else if (model.getWindowToUse().equals("In File"))
+		{
+			inputFileChooser.showOpenDialog(chooserFrame);
+		}
+		else if (model.getWindowToUse().equals("In File Chooser"))
+		{
+			model.setInFile(inputFileChooser.getSelectedFile());
+		}
+		else if (model.getWindowToUse().equals("Out File"))
+		{
+			outputFileChooser.showOpenDialog(chooserFrame);
+		}
+		else if (model.getWindowToUse().equals("Out File Chooser"))
+		{
+			model.setInFile(outputFileChooser.getSelectedFile());
+		}
+        else
+		{
+
+		}
     }
 }

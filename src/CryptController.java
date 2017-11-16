@@ -9,10 +9,27 @@ import java.awt.event.ActionListener;
  * The controller interprets the mouse and keyboard inputs from the user,
  * informing the model and/or the view to change as appropriate.
  */
-public class CryptController implements ActionListener
+public class CryptController
 {
     private CryptModel model;
     private CryptView   view;
+    ComponentListener listener = new ComponentListener();
+
+
+    public static void main(String[] args)
+    {
+        new CryptController();
+    }
+
+    public void addListeners()
+    {
+        view.asymmetric.addActionListener(listener);
+        view.symmetric.addActionListener(listener);
+        view.inputChooserButton.addActionListener(listener);
+        view.inputFileChooser.addActionListener(listener);
+        view.outputChooserButton.addActionListener(listener);
+        view.outputFileChooser.addActionListener(listener);
+    }
 
     /**
      * Constructor to setup MVC
@@ -21,7 +38,9 @@ public class CryptController implements ActionListener
     {
         model = new CryptModel();
         view  = new CryptView(model);
+        addListeners();
     }
+
 
     /**
      * Method that updates the view of CryptView
@@ -31,46 +50,59 @@ public class CryptController implements ActionListener
         view.update();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
+    class ComponentListener implements ActionListener
     {
-        if (e.getSource() == view.symmetric)  //Symetric key Button
+        public void actionPerformed(ActionEvent e)
         {
-            model.setWindowToUse("Symmetric");
-            updateView();
-        }
-        else if (e.getSource() == view.asymmetric) //Asymetric Key button
-        {
-            model.setWindowToUse("Asymmetric");
-            updateView();
-        }
+            if (e.getSource() == view.symmetric)  //Symetric key Button
+            {
+                model.setWindowToUse("Symmetric");
+                updateView();
+            }
+            else if (e.getSource() == view.asymmetric) //Asymetric Key button
+            {
+                model.setWindowToUse("Asymmetric");
+                updateView();
+            }
 
-      else if(e.getSource() == view.inputChooserButton) //Input Button
-        {
-            model.setWindowToUse("In File");
-            updateView();
-        }
-        else if(e.getSource() == view.outputChooserButton)//Output button
-        {
-            model.setWindowToUse("Out File");
-            updateView();
-        }
-        else if(e.getSource() == view.encrypt)//Encrypt
-        {
-            model.setWindowToUse("encrypt");
-            updateView();
-        }
-        else if(e.getSource() == view.decrypt) //Decrypt
-        {
-            model.setWindowToUse("decrypt");
-            updateView();
-        }
-        else if(e.getSource() == view.generateKeys)//Generate keys button
-        {
-            model.setWindowToUse("Generate Keys:");
-            updateView();
-        }
+            else if(e.getSource() == view.inputChooserButton) //Input File Chooser Button
+            {
+                model.setWindowToUse("In File");
+                updateView();
+            }
+            else if(e.getSource() == view.inputFileChooser) //Input File Chooser
+            {
+                model.setWindowToUse("In File Chooser");
+                updateView();
+            }
+            else if(e.getSource() == view.outputChooserButton) //Output File Chooser Button
+            {
+                model.setWindowToUse("Out File");
+                updateView();
+            }
+            else if(e.getSource() == view.outputFileChooser) //Output File Chooser
+            {
+                model.setWindowToUse("Out File Chooser");
+                updateView();
+            }
+            else if(e.getSource() == view.encrypt)//Encrypt
+            {
+                model.setWindowToUse("encrypt");
+                updateView();
+            }
+            else if(e.getSource() == view.decrypt) //Decrypt
+            {
+                model.setWindowToUse("decrypt");
+                updateView();
+            }
+            else if(e.getSource() == view.generateKeys)//Generate keys button
+            {
+                model.setWindowToUse("Generate Keys:");
+                updateView();
+            }
 
+        }
     }
+
 }
 
