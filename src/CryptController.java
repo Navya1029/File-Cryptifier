@@ -38,6 +38,7 @@ public class CryptController
         view.privateKeyChooser.addActionListener(listener);
         view.encrypt.addActionListener(listener);
         view.decrypt.addActionListener(listener);
+
     }
 
     /**
