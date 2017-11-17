@@ -1,5 +1,6 @@
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -44,6 +45,7 @@ public class CryptView
 	JLabel symmetricLabel;
 	JTextField symmetricKey;
 	JPanel symmetricPanel;
+	JButton symmetricButton;
 	
 	JButton generateKeys;
 	
@@ -100,8 +102,10 @@ public class CryptView
 		symmetricLabel = new JLabel("Symmetric Key:");
 		symmetricKey = new JTextField("", 30);
 		symmetricPanel = new JPanel();
+		symmetricButton = new JButton("Set Symmetric Key");
 		symmetricPanel.add(symmetricLabel);
 		symmetricPanel.add(symmetricKey);
+		symmetricPanel.add(symmetricButton);
 		
 		generateKeys = new JButton("Generate Keys:");
 		
@@ -192,11 +196,59 @@ public class CryptView
 		}
 		else if (model.getWindowToUse().equals("Out File Chooser"))
 		{
-			model.setInFile(outputFileChooser.getSelectedFile());
+			model.setOutFile(outputFileChooser.getSelectedFile().getAbsolutePath());
 		}
-        else
+		else if (model.getWindowToUse().equals("Generate Keys:"))
 		{
-
+			try
+			{
+				model.sk.generatePublicPrivateKeys();
+			} catch (NoSuchAlgorithmException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else if (model.getWindowToUse().equals("Symmetric Button"))
+		{
+			model.setSymmetricKey(symmetricKey.getText());
+		}
+		else if (model.getWindowToUse().equals("Public Key:"))
+		{
+			publicKeyChooser.showOpenDialog(chooserFrame);
+		}
+		else if (model.getWindowToUse().equals("Private Key:"))
+		{
+			privateKeyChooser.showOpenDialog(chooserFrame);
+		}
+		else if (model.getWindowToUse().equals("Public Key Chooser"))
+		{
+			try
+			{
+				model.setPublicKey(publicKeyChooser.getSelectedFile());
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else if (model.getWindowToUse().equals("Private Key Chooser"))
+		{
+			try
+			{
+				model.setPrivateKey(privateKeyChooser.getSelectedFile());
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+        else if (model.getWindowToUse().equals("Encrypt Button"))
+		{
+			model.encryptFile("Not Currently Implemented");
+		}
+		else if (model.getWindowToUse().equals("Decrypt Button"))
+		{
+			model.decryptFile("Not Currently Implemented");
 		}
     }
 }

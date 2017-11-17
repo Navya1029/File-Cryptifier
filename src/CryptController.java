@@ -29,6 +29,15 @@ public class CryptController
         view.inputFileChooser.addActionListener(listener);
         view.outputChooserButton.addActionListener(listener);
         view.outputFileChooser.addActionListener(listener);
+        view.symmetricKey.addActionListener(listener);
+        view.symmetricButton.addActionListener(listener);
+        view.generateKeys.addActionListener(listener);
+        view.publicKeyButton.addActionListener(listener);
+        view.privateKeyButton.addActionListener(listener);
+        view.publicKeyChooser.addActionListener(listener);
+        view.privateKeyChooser.addActionListener(listener);
+        view.encrypt.addActionListener(listener);
+        view.decrypt.addActionListener(listener);
     }
 
     /**
@@ -95,9 +104,44 @@ public class CryptController
                 model.setWindowToUse("decrypt");
                 updateView();
             }
+            else if(e.getSource() == view.symmetricButton)
+            {
+                model.setWindowToUse("Symmetric Button");
+                updateView();
+            }
             else if(e.getSource() == view.generateKeys)//Generate keys button
             {
                 model.setWindowToUse("Generate Keys:");
+                updateView();
+            }
+            else if(e.getSource() == view.publicKeyButton) //Public Key Button
+            {
+                model.setWindowToUse("Public Key:");
+                updateView();
+            }
+            else if(e.getSource() == view.privateKeyButton) //Public Key Button
+            {
+                model.setWindowToUse("Private Key:");
+                updateView();
+            }
+            else if(e.getSource() == view.publicKeyChooser) //Public Key Button
+            {
+                model.setWindowToUse("Public Key Chooser");
+                updateView();
+            }
+            else if(e.getSource() == view.privateKeyChooser) //Public Key Button
+            {
+                model.setWindowToUse("Private Key Chooser");
+                updateView();
+            }
+            else if(e.getSource() == view.encrypt)
+            {
+                model.setWindowToUse("Encrypt Button");
+                updateView();
+            }
+            else if(e.getSource() == view.decrypt)
+            {
+                model.setWindowToUse("Decrypt Button");
                 updateView();
             }
 
