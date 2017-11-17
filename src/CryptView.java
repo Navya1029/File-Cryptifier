@@ -2,6 +2,7 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.security.NoSuchAlgorithmException;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -168,6 +169,7 @@ public class CryptView
 			container.add(bottom);
 			container.revalidate();
 			container.repaint();
+			model.setSymmetric();
         }
         else if (model.getWindowToUse().equals("Asymmetric"))
         {
@@ -181,7 +183,19 @@ public class CryptView
 			container.add(bottom);
 			container.revalidate();
 			container.repaint();
-        }
+			try
+			{
+				model.setAsymmetric();
+			}
+			catch (NoSuchAlgorithmException e)
+			{
+				e.printStackTrace();
+			}
+			catch (NoSuchPaddingException e)
+			{
+				e.printStackTrace();
+			}
+		}
         else if (model.getWindowToUse().equals("In File"))
 		{
 			inputFileChooser.showOpenDialog(chooserFrame);
