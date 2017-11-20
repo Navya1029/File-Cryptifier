@@ -58,6 +58,21 @@ public class CryptView
 	
 	public void init() //creates buttons and windows
 	{
+		//This should make things look good for now on all Operating Systems
+		//Later we will update the look and feel
+		//Warning: If GodMode is enabled on your Windows 10 device this will cause problems.
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e2) {
+			e2.printStackTrace();
+		} catch (InstantiationException e2) {
+			e2.printStackTrace();
+		} catch (IllegalAccessException e2) {
+			e2.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e2) {
+			e2.printStackTrace();
+		}
+
 		symmetric = new JRadioButton("Symmetric Encryption");
 		asymmetric = new JRadioButton("Asymmetric Encryption");
 		encryptionType = new ButtonGroup();
