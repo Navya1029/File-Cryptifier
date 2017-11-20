@@ -22,7 +22,7 @@ import javax.swing.SwingConstants;
  */
 public class CryptView
 {
-    private CryptModel model;
+    private CryptModel model; //Javax Api variables
 
     JRadioButton symmetric;
 	JRadioButton asymmetric;
@@ -64,7 +64,7 @@ public class CryptView
 	JFrame frame;
 	JFrame chooserFrame;
 	
-	public void init()
+	public void init() //creates buttons and windows
 	{
 		symmetric = new JRadioButton("Symmetric Encryption");
 		asymmetric = new JRadioButton("Asymmetric Encryption");
@@ -155,9 +155,9 @@ public class CryptView
     /**
      * Method used to update the view
      */
-    public void update()
+    public void update() //updated view for the model
     {
-        if (model.getWindowToUse().equals("Symmetric"))
+        if (model.getWindowToUse().equals("Symmetric")) // for symetric
         {
         	Component[] components = container.getComponents();
 			for (int i = 0; i < components.length; i++)
@@ -171,7 +171,7 @@ public class CryptView
 			container.repaint();
 			model.setSymmetric();
         }
-        else if (model.getWindowToUse().equals("Asymmetric"))
+        else if (model.getWindowToUse().equals("Asymmetric")) //for asymetric
         {
 			Component[] components = container.getComponents();
 			for (int i = 0; i < components.length; i++)
@@ -196,23 +196,23 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-        else if (model.getWindowToUse().equals("In File"))
+        else if (model.getWindowToUse().equals("In File")) //for infile
 		{
 			inputFileChooser.showOpenDialog(chooserFrame);
 		}
-		else if (model.getWindowToUse().equals("In File Chooser"))
+		else if (model.getWindowToUse().equals("In File Chooser")) //for infile chooser
 		{
 			model.setInFile(inputFileChooser.getSelectedFile());
 		}
-		else if (model.getWindowToUse().equals("Out File"))
+		else if (model.getWindowToUse().equals("Out File")) //for outfile
 		{
 			outputFileChooser.showOpenDialog(chooserFrame);
 		}
-		else if (model.getWindowToUse().equals("Out File Chooser"))
+		else if (model.getWindowToUse().equals("Out File Chooser")) //for outfile chooser
 		{
 			model.setOutFile(outputFileChooser.getSelectedFile().getAbsolutePath());
 		}
-		else if (model.getWindowToUse().equals("Generate Keys:"))
+		else if (model.getWindowToUse().equals("Generate Keys:")) //for generate keys
 		{
 			try
 			{
@@ -222,19 +222,19 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-		else if (model.getWindowToUse().equals("Symmetric Button"))
+		else if (model.getWindowToUse().equals("Symmetric Button")) //symetric button
 		{
 			model.setSymmetricKey(symmetricKey.getText());
 		}
-		else if (model.getWindowToUse().equals("Public Key:"))
+		else if (model.getWindowToUse().equals("Public Key:")) //public key button
 		{
 			publicKeyChooser.showOpenDialog(chooserFrame);
 		}
-		else if (model.getWindowToUse().equals("Private Key:"))
+		else if (model.getWindowToUse().equals("Private Key:")) //for private key
 		{
 			privateKeyChooser.showOpenDialog(chooserFrame);
 		}
-		else if (model.getWindowToUse().equals("Public Key Chooser"))
+		else if (model.getWindowToUse().equals("Public Key Chooser")) //for public key chooser
 		{
 			try
 			{
@@ -245,7 +245,7 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-		else if (model.getWindowToUse().equals("Private Key Chooser"))
+		else if (model.getWindowToUse().equals("Private Key Chooser")) // private key chooser
 		{
 			try
 			{
@@ -257,12 +257,12 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-        else if (model.getWindowToUse().equals("Encrypt Button"))
+        else if (model.getWindowToUse().equals("Encrypt Button")) //encrypt button
 		{
 			System.out.println("Encrypt Button");
 			model.encryptFile("Not Currently Implemented");
 		}
-		else if (model.getWindowToUse().equals("Decrypt Button"))
+		else if (model.getWindowToUse().equals("Decrypt Button")) // for decrypt button
 		{
 			model.decryptFile("Not Currently Implemented");
 		}
