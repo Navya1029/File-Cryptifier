@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.security.Key;
@@ -12,7 +13,7 @@ import sun.misc.BASE64Decoder;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/3/17
+ * @Date Updated: 11/20/17
  * @Model_Used: Strategy
  *
  * This is used for Symmetric Key. The plan is to have the user be able to choose what type of encryption / decryption
@@ -24,36 +25,25 @@ public class SymmetricKey implements FileCryptoInterface
     @Override
     public File fileEncryptor(File file, String algorithm, StoredKeys keys)
     {
-    		File tempFile = new File("AES-Encrypted");
+		File tempFile = new File("Messages/AES-Encrypted");
 
-    		try 
-    		{
-    			//This is the type of cipher we will use
-				Cipher c = Cipher.getInstance("AES");
+		try
+		{
+			//This is the type of cipher we will use
+			Cipher c = Cipher.getInstance("AES");
 
-				//Takes the key and converts it to something we can use to encode
-				byte[] key = keys.getSymmetricKey().getBytes("UTF-8");
-				MessageDigest sha = MessageDigest.getInstance("SHA-1");
-				key = sha.digest(key);
-				key = Arrays.copyOf(key, 16);
+			//Creates the cipher in encrypt mode using this key
+			c.init(Cipher.ENCRYPT_MODE, keys.getSymmetricKey());
 
-				SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES"); //Creates a secret key
+			//Encrypts the files bytes
+			byte[] cipherText = c.doFinal(Files.readAllBytes(file.toPath()));
 
-				//Creates the cipher in encrypt mode using this key
-				c.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+			FileOutputStream out = new FileOutputStream(tempFile);
+			byte[] output = c.doFinal(cipherText);
+			out.write(output);
 
-				//Encrypts the files bytes
-				byte[] cipherText = c.doFinal(Files.readAllBytes(file.toPath()));
-
-				StringBuffer sb = new StringBuffer(); //A string buffer
-				for(int i = 0; i < cipherText.length; i++)
-				{
-					sb.append(Integer.toString((cipherText[i] & 0xff) + 0x100, 16).substring(1)); //puts the Encrypted stuff in the buffer
-				}
-
-				FileWriter fw = new FileWriter(tempFile); //Writes files
-				fw.write(sb.toString()); //writes to file
-				fw.close(); //Closes the file
+			out.flush();
+			out.close();
 		} catch (Exception e) { System.out.println("AES Encryption Failed"); }
 		
         return tempFile;
@@ -62,37 +52,27 @@ public class SymmetricKey implements FileCryptoInterface
     @Override
     public File fileDecryptor(File file, String algorithm, StoredKeys keys)
     {
-		File tempFile = new File("AES-Decrypted");
+		File tempFile = new File("Messages/AES-Decrypted");
 
 		try
 		{
 			//This is the type of cipher we will use
 			Cipher c = Cipher.getInstance("AES");
 
-			//Takes the key and converts it to something we can use to decode
-			byte[] key = keys.getSymmetricKey().getBytes("UTF-8");
-			MessageDigest sha = MessageDigest.getInstance("SHA-1");
-			key = sha.digest(key);
-			key = Arrays.copyOf(key, 16);
+			//Creates the cipher in encrypt mode using this key
+			c.init(Cipher.DECRYPT_MODE, keys.getSymmetricKey());
 
-			SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
-
-			//Creates the cipher in decrypt mode using this key
-			c.init(Cipher.DECRYPT_MODE, secretKeySpec);
-
-			//Decrypts the files bytes
+			//Encrypts the files bytes
 			byte[] cipherText = c.doFinal(Files.readAllBytes(file.toPath()));
 
-			StringBuffer sb = new StringBuffer(); //A string buffer
-			for(int i = 0; i < cipherText.length; i++)
-			{
-				sb.append(Integer.toString((cipherText[i] & 0xff) + 0x100, 16).substring(1)); //puts the decrypted stuff in the buffer
-			}
+			FileOutputStream out = new FileOutputStream(tempFile);
+			byte[] output = c.doFinal(cipherText);
+			out.write(output);
 
-			FileWriter fw = new FileWriter(tempFile); //Writes files
-			fw.write(sb.toString()); //writes to file
-			fw.close(); //Closes the file
-		} catch (Exception e) { System.out.println("AES Decryption Failed"); }
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			System.out.println("AES Decryption Failed\n" + e.getMessage()); }
 
 		return tempFile;
     }

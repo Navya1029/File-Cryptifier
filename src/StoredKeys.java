@@ -1,6 +1,8 @@
+import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -24,7 +26,7 @@ public class StoredKeys
 {
 	private static StoredKeys instance;
 
-	private String SymmetricKey;
+	private SecretKeySpec SymmetricKey;
 	private PublicKey publicKey;
 	private PrivateKey privateKey;
 	
@@ -41,9 +43,10 @@ public class StoredKeys
 	}
 	
 	//--------------------------------SETTERS--------------------------------------
-	public void setSymmetricKey(String key)
+	public void setSymmetricKey(String key) throws UnsupportedEncodingException
 	{
-		this.SymmetricKey = key;
+
+		this.SymmetricKey = new SecretKeySpec(fixSecret(key, 16), "AES");
 	}
 	
 	public void setPublicKey(PublicKey key)
@@ -58,7 +61,7 @@ public class StoredKeys
 	//--------------------------------SETTERS--------------------------------------
 	
 	//--------------------------------GETTERS--------------------------------------
-	public String getSymmetricKey()
+	public SecretKeySpec getSymmetricKey()
 	{
 		return SymmetricKey;
 	}
@@ -73,7 +76,27 @@ public class StoredKeys
 		return privateKey;
 	}
 	//--------------------------------GETTERS--------------------------------------
-	
+
+	/**
+	 * This method makes sure that the symmetric key is valid
+	 * @param s (This is the shared key)
+	 * @param length (This is how long the key can be)
+	 * @return New Key
+	 * @throws UnsupportedEncodingException
+	 */
+	private byte[] fixSecret(String s, int length) throws UnsupportedEncodingException
+	{
+		if (s.length() < length)
+		{
+			int missingLength = length - s.length();
+			for (int i = 0; i < missingLength; i++)
+			{
+				s += " ";
+			}
+		}
+		return s.substring(0, length).getBytes("UTF-8");
+	}
+
 	/*
 	 * This method generates the public and private keys needed for Asymmetric Encryption and Decryption.
 	 */

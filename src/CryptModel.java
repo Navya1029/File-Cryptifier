@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.NoSuchPaddingException;
@@ -107,7 +108,13 @@ public class CryptModel
      */
     public void setSymmetricKey(String key)
     {
-        sk.setSymmetricKey(key);
+        try
+        {
+            sk.setSymmetricKey(key);
+        } catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     /**
