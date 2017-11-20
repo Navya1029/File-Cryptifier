@@ -27,6 +27,9 @@ public class SymmetricKey implements FileCryptoInterface
     {
 		File tempFile = new File("Messages/AES-Encrypted");
 
+		//This makes the directory so the file can be stored
+		tempFile.getParentFile().mkdirs();
+
 		try
 		{
 			//This is the type of cipher we will use
@@ -53,6 +56,9 @@ public class SymmetricKey implements FileCryptoInterface
     public File fileDecryptor(File file, String algorithm, StoredKeys keys)
     {
 		File tempFile = new File("Messages/AES-Decrypted");
+
+		//This makes the directory so the file can be stored
+		tempFile.getParentFile().mkdirs();
 
 		try
 		{
