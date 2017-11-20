@@ -5,7 +5,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/6/17
+ * @Date Updated: 11/20/17
  * @Model_Used: Model-View-Controller
  *
  * The model manages the behavior and data of the application domain,
@@ -42,6 +42,7 @@ public class CryptModel
      */
     public void setSymmetric()
     {
+        System.out.println("TEST Sym");
         strategy = new SymmetricKey();
         
         //Used to update the view to have proper window for Encryption / Decryption
@@ -84,6 +85,7 @@ public class CryptModel
      */
     public void encryptFile(String algorithm)
     {
+        System.out.println("Encrypt File");
         outFile = strategy.fileEncryptor(inFile, algorithm, sk);
     }
 
@@ -94,6 +96,7 @@ public class CryptModel
      */
     public void decryptFile(String algorithm)
     {
+        System.out.println("Decrypt File");
         outFile = strategy.fileDecryptor(inFile, algorithm, sk);
     }
     
@@ -126,7 +129,7 @@ public class CryptModel
     public void setPrivateKey(File key) throws Exception
     {
         keyPrivate = key;
-        sk.getPublicFromFile(keyPrivate.getAbsolutePath());
+        sk.getPrivateFromFile(keyPrivate.getAbsolutePath());
     }
 
     /**
@@ -157,6 +160,7 @@ public class CryptModel
     public void setOutFile(String filePath)
     {
         outFile = new File(filePath);
+        outFile.getParentFile().mkdirs();
     }
 
     /**
@@ -167,5 +171,6 @@ public class CryptModel
     public void setInFile(File inFile)
     {
         this.inFile = inFile;
+        this.inFile.getParentFile().mkdirs();
     }
 }

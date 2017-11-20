@@ -14,7 +14,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  * @Authors Tyler, Matt, Daniel
- * @Date_Updated 11/3/17
+ * @Date_Updated 11/20/17
  * @Model_Used Strategy
  * 
  * This is used for Asymmetric Key. The plan is to have the user be able to choose what type of encryption / decryption
@@ -28,13 +28,14 @@ public class AsymmetricKey implements FileCryptoInterface
     //Constructor that sets the instance of the cipher to be RSA
     public AsymmetricKey() throws NoSuchAlgorithmException, NoSuchPaddingException
     {
-    		cipher = Cipher.getInstance("RSA");
+        cipher = Cipher.getInstance("RSA");
     }
 
     @Override
     public File fileEncryptor(File file, String algorithm, StoredKeys keys) 
     {
-    		//Creates the file where the encrepted message will be stored
+        System.out.println("file Encryptor Asy");
+        //Creates the file where the encrepted message will be stored
         File encryptFile = new File("Messages/Encrypted-Message.txt");
         
         //Initializing the byte array
@@ -58,7 +59,7 @@ public class AsymmetricKey implements FileCryptoInterface
     @Override
     public File fileDecryptor(File file, String algorithm, StoredKeys keys) 
     {
-    		//Creates the file where the decrypted message will be stored
+        //Creates the file where the decrypted message will be stored
         File decryptFile = new File("Messages/Decrypted-Message.txt");
 
         //Initializing the byte array
@@ -106,14 +107,11 @@ public class AsymmetricKey implements FileCryptoInterface
     }
 
     //Function that writes the bytes to the file specified then returns the file
-    private File writeToFile(File output, byte[] toWrite)
-            throws IllegalBlockSizeException, BadPaddingException, IOException
+    private void writeToFile(File output, byte[] toWrite) throws IllegalBlockSizeException, BadPaddingException, IOException
     {
         FileOutputStream fos = new FileOutputStream(output);
         fos.write(toWrite);
         fos.flush();
         fos.close();
-
-        return output;
     }
 }

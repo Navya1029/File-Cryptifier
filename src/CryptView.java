@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/6/17
+ * @Date Updated: 11/20/17
  * @Model_Used: Model-View-Controller
  *
  * The view manages the display of information.
@@ -249,6 +249,7 @@ public class CryptView
 		{
 			try
 			{
+				System.out.println("Private Key Chooser");
 				model.setPrivateKey(privateKeyChooser.getSelectedFile());
 			}
 			catch (Exception e)
@@ -258,6 +259,7 @@ public class CryptView
 		}
         else if (model.getWindowToUse().equals("Encrypt Button"))
 		{
+			System.out.println("Encrypt Button");
 			model.encryptFile("Not Currently Implemented");
 		}
 		else if (model.getWindowToUse().equals("Decrypt Button"))

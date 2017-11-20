@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/13/17
+ * @Date Updated: 11/20/17
  * @Model_Used: Model-View-Controller
  *
  * The controller interprets the mouse and keyboard inputs from the user,
@@ -93,16 +93,6 @@ public class CryptController
             else if(e.getSource() == view.outputFileChooser) //Output File Chooser
             {
                 model.setWindowToUse("Out File Chooser");
-                updateView();
-            }
-            else if(e.getSource() == view.encrypt)//Encrypt
-            {
-                model.setWindowToUse("encrypt");
-                updateView();
-            }
-            else if(e.getSource() == view.decrypt) //Decrypt
-            {
-                model.setWindowToUse("decrypt");
                 updateView();
             }
             else if(e.getSource() == view.symmetricButton)
