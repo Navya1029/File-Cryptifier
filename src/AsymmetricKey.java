@@ -46,7 +46,7 @@ public class AsymmetricKey implements FileCryptoInterface
 			fileBytes = getFileInBytes(file);
 			
 			//Encrypts the file
-			encryptFile(fileBytes, encryptFile, keys.getPrivateKey());
+			encryptFile(fileBytes, encryptFile, keys.getPublicKey());
 		} catch (IOException | GeneralSecurityException e)
 		{
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class AsymmetricKey implements FileCryptoInterface
 			fileBytes = getFileInBytes(file);
 			
 			//Decrypts the file
-			decryptFile(fileBytes, decryptFile, keys.getPublicKey());
+			decryptFile(fileBytes, decryptFile, keys.getPrivateKey());
 		} catch (IOException | GeneralSecurityException e)
 		{
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class AsymmetricKey implements FileCryptoInterface
     }
 
     //Function that Encrypts the file
-    public void encryptFile(byte[] input, File output, PrivateKey key)
+    public void encryptFile(byte[] input, File output, PublicKey key)
             throws IOException, GeneralSecurityException
     {
         this.cipher.init(Cipher.ENCRYPT_MODE, key);
@@ -99,7 +99,7 @@ public class AsymmetricKey implements FileCryptoInterface
     }
 
     //Function that Decrypts the file
-    public void decryptFile(byte[] input, File output, PublicKey key)
+    public void decryptFile(byte[] input, File output, PrivateKey key)
             throws IOException, GeneralSecurityException
     {
         this.cipher.init(Cipher.DECRYPT_MODE, key);

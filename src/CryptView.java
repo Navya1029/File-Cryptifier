@@ -3,15 +3,7 @@ import java.awt.GridLayout;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.NoSuchPaddingException;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 /**
  * @Authors: Tyler, Matt, Daniel
@@ -66,6 +58,21 @@ public class CryptView
 	
 	public void init() //creates buttons and windows
 	{
+		//This should make things look good for now on all Operating Systems
+		//Later we will update the look and feel
+		//Warning: If GodMode is enabled on your Windows 10 device this will cause problems.
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e2) {
+			e2.printStackTrace();
+		} catch (InstantiationException e2) {
+			e2.printStackTrace();
+		} catch (IllegalAccessException e2) {
+			e2.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e2) {
+			e2.printStackTrace();
+		}
+
 		symmetric = new JRadioButton("Symmetric Encryption");
 		asymmetric = new JRadioButton("Asymmetric Encryption");
 		encryptionType = new ButtonGroup();
