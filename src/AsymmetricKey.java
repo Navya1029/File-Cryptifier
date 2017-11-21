@@ -37,6 +37,9 @@ public class AsymmetricKey implements FileCryptoInterface
         System.out.println("file Encryptor Asy");
         //Creates the file where the encrepted message will be stored
         File encryptFile = new File("Messages/Encrypted-Message.txt");
+
+        //This makes the directory so the file can be stored
+        encryptFile.getParentFile().mkdirs();
         
         //Initializing the byte array
         byte[] fileBytes;
@@ -61,6 +64,9 @@ public class AsymmetricKey implements FileCryptoInterface
     {
         //Creates the file where the decrypted message will be stored
         File decryptFile = new File("Messages/Decrypted-Message.txt");
+
+        //This makes the directory so the file can be stored
+        decryptFile.getParentFile().mkdirs();
 
         //Initializing the byte array
         byte[] fileBytes;
