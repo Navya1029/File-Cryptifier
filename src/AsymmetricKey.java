@@ -34,9 +34,15 @@ public class AsymmetricKey implements FileCryptoInterface
     @Override
     public File fileEncryptor(File file, String algorithm, StoredKeys keys) 
     {
-        System.out.println("file Encryptor Asy");
+        //System.out.println("file Encryptor Asy");
+
+        //This is to get the input file so we can save the output file in the same directory with a different name
+        String fileName = file.getPath();
+        int ext = fileName.lastIndexOf(".");
+        String fileName2 = fileName.substring(0, ext);
+
         //Creates the file where the encrepted message will be stored
-        File encryptFile = new File("Messages/Encrypted-Message.txt");
+        File encryptFile = new File(fileName2 + "-Encrypted-RSA" + fileName.substring(ext));
 
         //This makes the directory so the file can be stored
         encryptFile.getParentFile().mkdirs();
@@ -62,8 +68,13 @@ public class AsymmetricKey implements FileCryptoInterface
     @Override
     public File fileDecryptor(File file, String algorithm, StoredKeys keys) 
     {
+        //This is to get the input file so we can save the output file in the same directory with a different name
+        String fileName = file.getPath();
+        int ext = fileName.lastIndexOf(".");
+        String fileName2 = fileName.substring(0, ext);
+
         //Creates the file where the decrypted message will be stored
-        File decryptFile = new File("Messages/Decrypted-Message.txt");
+        File decryptFile = new File(fileName2 + "-Decrypoted-RSA" + fileName.substring(ext));
 
         //This makes the directory so the file can be stored
         decryptFile.getParentFile().mkdirs();
