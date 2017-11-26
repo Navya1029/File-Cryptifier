@@ -43,7 +43,7 @@ public class CryptModel
      */
     public void setSymmetric()
     {
-        System.out.println("TEST Sym");
+        //System.out.println("TEST Sym");
         strategy = new SymmetricKey();
         
         //Used to update the view to have proper window for Encryption / Decryption
@@ -161,13 +161,10 @@ public class CryptModel
 
     /**
      * Method that sets the output file for the encryption or decryption
-     *
-     * @param filePath (Path of file)
      */
-    public void setOutFile(String filePath)
+    public File getInFile()
     {
-        outFile = new File(filePath);
-        outFile.getParentFile().mkdirs();
+        return inFile;
     }
 
     /**

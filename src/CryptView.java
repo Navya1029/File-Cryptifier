@@ -22,11 +22,10 @@ public class CryptView
 	JPanel encryptionSelection;
 	
 	JLabel inputFileLabel;
-	JLabel outputFileLabel;
+	JLabel inputFileLabel2;
 	JFileChooser inputFileChooser;
 	JButton inputChooserButton;
-	JFileChooser outputFileChooser;
-	JButton outputChooserButton;
+	JLabel inputFileName;
 	JPanel fileIO;
 	
 	JPanel top;
@@ -83,17 +82,17 @@ public class CryptView
 		encryptionSelection.add(asymmetric);
 		
 		inputFileLabel = new JLabel("In File:", SwingConstants.CENTER);
-		outputFileLabel = new JLabel("Out File:", SwingConstants.CENTER);
+		inputFileLabel2 = new JLabel("Selected File:", SwingConstants.CENTER);
 		inputFileChooser = new JFileChooser();
 		inputChooserButton = new JButton("Find");
-		outputFileChooser = new JFileChooser();
-		outputChooserButton = new JButton("Find");
+		inputFileName = new JLabel("");
+
 		fileIO = new JPanel();
 		fileIO.setLayout(new GridLayout(2, 2));
 		fileIO.add(inputFileLabel);
 		fileIO.add(inputChooserButton);
-		fileIO.add(outputFileLabel);
-		fileIO.add(outputChooserButton);
+		fileIO.add(inputFileLabel2);
+		fileIO.add(inputFileName);
 		
 		top = new JPanel();
 		top.setLayout(new GridLayout(1, 2));
@@ -164,7 +163,7 @@ public class CryptView
      */
     public void update() //updated view for the model
     {
-        if (model.getWindowToUse().equals("Symmetric")) // for symetric
+        if (model.getWindowToUse().equals("Symmetric")) //for symetric
         {
         	Component[] components = container.getComponents();
 			for (int i = 0; i < components.length; i++)
@@ -210,14 +209,9 @@ public class CryptView
 		else if (model.getWindowToUse().equals("In File Chooser")) //for infile chooser
 		{
 			model.setInFile(inputFileChooser.getSelectedFile());
-		}
-		else if (model.getWindowToUse().equals("Out File")) //for outfile
-		{
-			outputFileChooser.showOpenDialog(chooserFrame);
-		}
-		else if (model.getWindowToUse().equals("Out File Chooser")) //for outfile chooser
-		{
-			model.setOutFile(outputFileChooser.getSelectedFile().getAbsolutePath());
+
+			//Gets the name of the input file so the user knows what file they are using.
+			inputFileName.setText(model.getInFile().getName().toString());
 		}
 		else if (model.getWindowToUse().equals("Generate Keys:")) //for generate keys
 		{

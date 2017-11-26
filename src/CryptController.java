@@ -27,8 +27,6 @@ public class CryptController
         view.symmetric.addActionListener(listener);
         view.inputChooserButton.addActionListener(listener);
         view.inputFileChooser.addActionListener(listener);
-        view.outputChooserButton.addActionListener(listener);
-        view.outputFileChooser.addActionListener(listener);
         view.symmetricKey.addActionListener(listener);
         view.symmetricButton.addActionListener(listener);
         view.generateKeys.addActionListener(listener);
@@ -83,16 +81,6 @@ public class CryptController
             else if(e.getSource() == view.inputFileChooser) //Input File Chooser
             {
                 model.setWindowToUse("In File Chooser");
-                updateView();
-            }
-            else if(e.getSource() == view.outputChooserButton) //Output File Chooser Button
-            {
-                model.setWindowToUse("Out File");
-                updateView();
-            }
-            else if(e.getSource() == view.outputFileChooser) //Output File Chooser
-            {
-                model.setWindowToUse("Out File Chooser");
                 updateView();
             }
             else if(e.getSource() == view.symmetricButton)
