@@ -28,9 +28,8 @@ public class SymmetricKey implements FileCryptoInterface
     	//This is to get the input file so we can save the output file in the same directory with a different name
 		String fileName = file.getPath();
 		int ext = fileName.lastIndexOf(".");
-		String fileName2 = fileName.substring(0, ext);
 
-		File tempFile = new File(fileName2 + "-Encrypted-AES" + fileName.substring(ext));
+		File tempFile = new File("Messages/Encrypted-AES" + fileName.substring(ext));
 
 		//This makes the directory so the file can be stored
 		tempFile.getParentFile().mkdirs();
@@ -63,9 +62,8 @@ public class SymmetricKey implements FileCryptoInterface
 		//This is to get the input file so we can save the output file in the same directory with a different name
 		String fileName = file.getPath();
 		int ext = fileName.lastIndexOf(".");
-		String fileName2 = fileName.substring(0, ext);
 
-		File tempFile = new File(fileName2 + "-Decrypted-AES" + fileName.substring(ext));
+		File tempFile = new File("Messages/Decrypted-AES" + fileName.substring(ext));
 
 		//This makes the directory so the file can be stored
 		tempFile.getParentFile().mkdirs();
