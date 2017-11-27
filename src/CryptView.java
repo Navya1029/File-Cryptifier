@@ -33,6 +33,8 @@ public class CryptView
 	JButton encrypt;
 	JButton decrypt;
 	JPanel bottom;
+
+	JTextArea messages;
 	
 	JLabel symmetricLabel;
 	JTextField symmetricKey;
@@ -105,6 +107,9 @@ public class CryptView
 		bottom.setLayout(new GridLayout(1, 2));
 		bottom.add(encrypt);
 		bottom.add(decrypt);
+
+		messages = new JTextArea("Go to our GitHub project page to learn more on how to use this program.");
+		messages.setEditable(false);
 		
 		symmetricLabel = new JLabel("Symmetric Key:");
 		symmetricKey = new JTextField("", 30);
@@ -135,9 +140,10 @@ public class CryptView
 		asymmetricPanel.add(keys);
 		
 		container = new JPanel();
-		container.setLayout(new GridLayout(3, 1));
+		container.setLayout(new GridLayout(4, 1));
 		container.add(top);
 		container.add(bottom);
+		container.add(messages);
 		
 		frame = new JFrame("File Encryption/Decryption");
 		frame.add(container);							
@@ -173,6 +179,7 @@ public class CryptView
 			container.add(top);
 			container.add(symmetricPanel);
 			container.add(bottom);
+			container.add(messages);
 			container.revalidate();
 			container.repaint();
 			model.setSymmetric();
@@ -187,6 +194,7 @@ public class CryptView
 			container.add(top);
 			container.add(asymmetricPanel);
 			container.add(bottom);
+			container.add(messages);
 			container.revalidate();
 			container.repaint();
 			try
@@ -267,6 +275,5 @@ public class CryptView
 		{
 			model.decryptFile("Not Currently Implemented");
 		}
-
     }
 }
