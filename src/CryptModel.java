@@ -6,7 +6,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/20/17
+ * @Date Updated: 11/27/17
  * @Model_Used: Model-View-Controller
  *
  * The model manages the behavior and data of the application domain,
@@ -20,6 +20,8 @@ public class CryptModel
 
     //What window to use for the proper info
     String windowToUse;
+
+    String encMethod;
 
     //Used for the keys
     StoredKeys sk = StoredKeys.getInstance();
@@ -45,6 +47,8 @@ public class CryptModel
     {
         //System.out.println("TEST Sym");
         strategy = new SymmetricKey();
+
+        encMethod= "Symmetric";
         
         //Used to update the view to have proper window for Encryption / Decryption
         windowToUse = "Symmetric";
@@ -59,7 +63,9 @@ public class CryptModel
     public void setAsymmetric() throws NoSuchAlgorithmException, NoSuchPaddingException
     {
         strategy = new AsymmetricKey();
-        
+
+        encMethod = "Asymmetric";
+
         //Used to update the view to have proper window for Encryption / Decryption
         windowToUse = "Asymmetric";
     }

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/20/17
+ * @Date Updated: 11/27/17
  * @Model_Used: Model-View-Controller
  *
  * The view manages the display of information.
@@ -37,7 +37,7 @@ public class CryptView
 	JTextArea messages;
 	
 	JLabel symmetricLabel;
-	JTextField symmetricKey;
+	JPasswordField symmetricKey;
 	JPanel symmetricPanel;
 	JButton symmetricButton;
 	
@@ -112,7 +112,7 @@ public class CryptView
 		messages.setEditable(false);
 		
 		symmetricLabel = new JLabel("Symmetric Key:");
-		symmetricKey = new JTextField("", 30);
+		symmetricKey = new JPasswordField("", 30);
 		symmetricPanel = new JPanel();
 		symmetricButton = new JButton("Set Symmetric Key");
 		symmetricPanel.add(symmetricLabel);
@@ -270,10 +270,12 @@ public class CryptView
 		{
 			System.out.println("Encrypt Button");
 			model.encryptFile("Not Currently Implemented");
+			messages.setText("Encrypted '" + model.getInFile().getName().toString() + "' with " + model.encMethod + " algorithm.");
 		}
 		else if (model.getWindowToUse().equals("Decrypt Button")) // for decrypt button
 		{
 			model.decryptFile("Not Currently Implemented");
+			messages.setText("Decrypted '" + model.getInFile().getName().toString() + "' with " + model.encMethod + " algorithm.");
 		}
     }
 }
