@@ -16,7 +16,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * @Authors Tyler, Matt, Daniel
- * @Date_Updated 11/20/17
+ * @Date_Updated 11/28/17
  * @Model_Used Singleton
  * 
  * This is a class used to keep track of the keys. This will make it so the encryption and decryption classes
@@ -109,7 +109,7 @@ public class StoredKeys
 
 		//Makes the key pair
 		KeyPair kp = kpg.generateKeyPair();
-		System.out.println("Keys generated");
+
 
 		//Saves the public and private keys to be used for encryption and decryption
 		publicKey = kp.getPublic();
@@ -148,7 +148,7 @@ public class StoredKeys
 		PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
 		KeyFactory kf = KeyFactory.getInstance("RSA");
 
-		System.out.println("Got private key");
+
 
 		return kf.generatePrivate(spec);
 	}
@@ -160,8 +160,9 @@ public class StoredKeys
 		X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
 		KeyFactory kf = KeyFactory.getInstance("RSA");
 
-		System.out.println("Got public key");
+
 
 		return kf.generatePublic(spec);
 	}
 }
+

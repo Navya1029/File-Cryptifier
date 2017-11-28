@@ -7,7 +7,7 @@ import javax.swing.*;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/27/17
+ * @Date Updated: 11/28/17
  * @Model_Used: Model-View-Controller
  *
  * The view manages the display of information.

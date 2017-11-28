@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/27/17
+ * @Date Updated: 11/28/17
  * @Model_Used: Model-View-Controller
  *
  * The controller interprets the mouse and keyboard inputs from the user,
@@ -14,7 +14,6 @@ public class CryptController
     private CryptModel model;
     private CryptView   view;
     ComponentListener listener = new ComponentListener();
-
 
     public static void main(String[] args)
     {
@@ -36,7 +35,6 @@ public class CryptController
         view.privateKeyChooser.addActionListener(listener);
         view.encrypt.addActionListener(listener);
         view.decrypt.addActionListener(listener);
-
     }
 
     /**
@@ -113,19 +111,17 @@ public class CryptController
                 model.setWindowToUse("Private Key Chooser");
                 updateView();
             }
-            else if(e.getSource() == view.encrypt)
+            else if(e.getSource() == view.encrypt) // Encrypt Button
             {
                 model.setWindowToUse("Encrypt Button");
                 updateView();
             }
-            else if(e.getSource() == view.decrypt)
+            else if(e.getSource() == view.decrypt) // Decrypt Button
             {
                 model.setWindowToUse("Decrypt Button");
                 updateView();
             }
-
         }
     }
-
 }
 

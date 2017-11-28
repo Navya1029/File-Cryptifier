@@ -14,7 +14,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  * @Authors Tyler, Matt, Daniel
- * @Date_Updated 11/20/17
+ * @Date_Updated 11/28/17
  * @Model_Used Strategy
  * 
  * This is used for Asymmetric Key. The plan is to have the user be able to choose what type of encryption / decryption
@@ -34,7 +34,6 @@ public class AsymmetricKey implements FileCryptoInterface
     @Override
     public File fileEncryptor(File file, String algorithm, StoredKeys keys) 
     {
-        //System.out.println("file Encryptor Asy");
 
         //This is to get the input file so we can save the output file in the same directory with a different name
         String fileName = file.getPath();

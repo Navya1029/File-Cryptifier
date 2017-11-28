@@ -6,7 +6,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/27/17
+ * @Date Updated: 11/28/17
  * @Model_Used: Model-View-Controller
  *
  * The model manages the behavior and data of the application domain,
@@ -45,7 +45,7 @@ public class CryptModel
      */
     public void setSymmetric()
     {
-        //System.out.println("TEST Sym");
+
         strategy = new SymmetricKey();
 
         encMethod= "Symmetric";
