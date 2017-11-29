@@ -13,7 +13,7 @@ import sun.misc.BASE64Decoder;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/28/17
+ * @Date Updated: 11/29/17
  * @Model_Used: Strategy
  *
  * This is used for Symmetric Key. The plan is to have the user be able to choose what type of encryption / decryption
@@ -21,7 +21,13 @@ import sun.misc.BASE64Decoder;
  */
 public class SymmetricKey implements FileCryptoInterface
 {
-
+	/**
+	 * This method encrypts the file given to it and stores the file in a set location
+	 * @param file (File that needs to be encrypted)
+	 * @param algorithm (Not currently used)
+	 * @param keys (Object that contains the keys)
+	 * @return Encrypted File (In case we want to open it up for the user)
+	 */
     @Override
     public File fileEncryptor(File file, String algorithm, StoredKeys keys)
     {
@@ -56,6 +62,13 @@ public class SymmetricKey implements FileCryptoInterface
         return tempFile;
     }
 
+	/**
+	 * This method decrypts the file given to it and stores the file in a set location
+	 * @param file (File that needs to be decrypted)
+	 * @param algorithm (Not currently used)
+	 * @param keys (Object that contains the keys)
+	 * @return Decrypted File (In case we want to open it up for the user)
+	 */
     @Override
     public File fileDecryptor(File file, String algorithm, StoredKeys keys)
     {

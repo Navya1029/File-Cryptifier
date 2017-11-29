@@ -6,7 +6,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/28/17
+ * @Date Updated: 11/29/17
  * @Model_Used: Model-View-Controller
  *
  * The model manages the behavior and data of the application domain,
@@ -15,6 +15,7 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class CryptModel
 {
+    //----------Initial Variables----------//
     //Holds the strategy to be used for Encryption or Decryption
     FileCryptoInterface strategy;
 
@@ -28,6 +29,7 @@ public class CryptModel
 
     //File initialization
     File inFile, outFile, keyPublic, keyPrivate;
+    //----------Initial Variables----------//
 
     /**
      * Method that assigns default strategy

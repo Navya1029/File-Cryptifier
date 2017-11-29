@@ -14,6 +14,7 @@ import javax.swing.*;
  */
 public class CryptView
 {
+	//----------Initial Variables----------//
     private CryptModel model; //Javax Api variables
 
     JRadioButton symmetric;
@@ -56,7 +57,11 @@ public class CryptView
 	JPanel container;
 	JFrame frame;
 	JFrame chooserFrame;
-	
+	//----------Initial Variables----------//
+
+	/**
+	 * This method initializes the view
+	 */
 	public void init() //creates buttons and windows
 	{
 		//This should make things look good for now on all Operating Systems
@@ -154,6 +159,7 @@ public class CryptView
 
 	    chooserFrame = new JFrame();
 	}
+
     /**
      * Constructor that gets the model from the Controller
      * @param model
@@ -169,7 +175,7 @@ public class CryptView
      */
     public void update() //updated view for the model
     {
-        if (model.getWindowToUse().equals("Symmetric")) //for symetric
+        if (model.getWindowToUse().equals("Symmetric")) //For symmetric
         {
         	Component[] components = container.getComponents();
 			for (int i = 0; i < components.length; i++)
@@ -184,7 +190,7 @@ public class CryptView
 			container.repaint();
 			model.setSymmetric();
         }
-        else if (model.getWindowToUse().equals("Asymmetric")) //for asymetric
+        else if (model.getWindowToUse().equals("Asymmetric")) //For asymmetric
         {
 			Component[] components = container.getComponents();
 			for (int i = 0; i < components.length; i++)
@@ -210,18 +216,18 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-        else if (model.getWindowToUse().equals("In File")) //for infile
+        else if (model.getWindowToUse().equals("In File")) //For infile
 		{
 			inputFileChooser.showOpenDialog(chooserFrame);
 		}
-		else if (model.getWindowToUse().equals("In File Chooser")) //for infile chooser
+		else if (model.getWindowToUse().equals("In File Chooser")) //For infile chooser
 		{
 			model.setInFile(inputFileChooser.getSelectedFile());
 
 			//Gets the name of the input file so the user knows what file they are using.
 			inputFileName.setText(model.getInFile().getName().toString());
 		}
-		else if (model.getWindowToUse().equals("Generate Keys:")) //for generate keys
+		else if (model.getWindowToUse().equals("Generate Keys:")) //For generate keys
 		{
 			try
 			{
@@ -231,19 +237,19 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-		else if (model.getWindowToUse().equals("Symmetric Button")) //symetric button
+		else if (model.getWindowToUse().equals("Symmetric Button")) //Symmetric button
 		{
 			model.setSymmetricKey(symmetricKey.getText());
 		}
-		else if (model.getWindowToUse().equals("Public Key:")) //public key button
+		else if (model.getWindowToUse().equals("Public Key:")) //Public key button
 		{
 			publicKeyChooser.showOpenDialog(chooserFrame);
 		}
-		else if (model.getWindowToUse().equals("Private Key:")) //for private key
+		else if (model.getWindowToUse().equals("Private Key:")) //For private key
 		{
 			privateKeyChooser.showOpenDialog(chooserFrame);
 		}
-		else if (model.getWindowToUse().equals("Public Key Chooser")) //for public key chooser
+		else if (model.getWindowToUse().equals("Public Key Chooser")) //For public key chooser
 		{
 			try
 			{
@@ -254,7 +260,7 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-		else if (model.getWindowToUse().equals("Private Key Chooser")) // private key chooser
+		else if (model.getWindowToUse().equals("Private Key Chooser")) //Private key chooser
 		{
 			try
 			{
@@ -266,13 +272,13 @@ public class CryptView
 				e.printStackTrace();
 			}
 		}
-        else if (model.getWindowToUse().equals("Encrypt Button")) //encrypt button
+        else if (model.getWindowToUse().equals("Encrypt Button")) //Encrypt button
 		{
 			System.out.println("Encrypt Button");
 			model.encryptFile("Not Currently Implemented");
 			messages.setText("Encrypted '" + model.getInFile().getName().toString() + "' with " + model.encMethod + " algorithm.");
 		}
-		else if (model.getWindowToUse().equals("Decrypt Button")) // for decrypt button
+		else if (model.getWindowToUse().equals("Decrypt Button")) //For decrypt button
 		{
 			model.decryptFile("Not Currently Implemented");
 			messages.setText("Decrypted '" + model.getInFile().getName().toString() + "' with " + model.encMethod + " algorithm.");
