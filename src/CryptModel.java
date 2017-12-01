@@ -37,6 +37,8 @@ public class CryptModel
     public CryptModel()
     {
         strategy = new SymmetricKey();
+
+        encMethod= "Symmetric";
         
         //Used to update the view to have proper window for Encryption / Decryption
         windowToUse = "Symmetric";
