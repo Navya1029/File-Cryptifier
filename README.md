@@ -14,12 +14,12 @@ This will show you how to use our program without errors.
 ## Encrypting & Decrypting With Symmetric Key:
 For this, select the Symmetric radio button and select a file you want to use and set a password.
 
-![](https://gfycat.com/gifs/detail/CraftyRaggedKillerwhale)
+![Symmetric](https://thumbs.gfycat.com/CraftyRaggedKillerwhale-size_restricted.gif)
 
 ## Encrypting & Decrypting With Asymmetric Key:
 For this, select the Asymmetric radio button and select the file you want to use. Next either generate keys or select the keys you would like to use. Generating keys selects them for you so you don't have to.
 
-![](https://gfycat.com/gifs/detail/PerfectAcidicAntelope)
+![Asymmetric](https://thumbs.gfycat.com/PerfectAcidicAntelope-size_restricted.gif)
 
 ---
 
