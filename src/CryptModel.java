@@ -6,7 +6,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/20/17
+ * @Date Updated: 11/29/17
  * @Model_Used: Model-View-Controller
  *
  * The model manages the behavior and data of the application domain,
@@ -15,17 +15,21 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class CryptModel
 {
+    //----------Initial Variables----------//
     //Holds the strategy to be used for Encryption or Decryption
     FileCryptoInterface strategy;
 
     //What window to use for the proper info
     String windowToUse;
 
+    String encMethod;
+
     //Used for the keys
     StoredKeys sk = StoredKeys.getInstance();
 
     //File initialization
     File inFile, outFile, keyPublic, keyPrivate;
+    //----------Initial Variables----------//
 
     /**
      * Method that assigns default strategy
@@ -33,6 +37,8 @@ public class CryptModel
     public CryptModel()
     {
         strategy = new SymmetricKey();
+
+        encMethod= "Symmetric";
         
         //Used to update the view to have proper window for Encryption / Decryption
         windowToUse = "Symmetric";
@@ -43,8 +49,10 @@ public class CryptModel
      */
     public void setSymmetric()
     {
-        System.out.println("TEST Sym");
+
         strategy = new SymmetricKey();
+
+        encMethod= "Symmetric";
         
         //Used to update the view to have proper window for Encryption / Decryption
         windowToUse = "Symmetric";
@@ -59,7 +67,9 @@ public class CryptModel
     public void setAsymmetric() throws NoSuchAlgorithmException, NoSuchPaddingException
     {
         strategy = new AsymmetricKey();
-        
+
+        encMethod = "Asymmetric";
+
         //Used to update the view to have proper window for Encryption / Decryption
         windowToUse = "Asymmetric";
     }
@@ -161,13 +171,10 @@ public class CryptModel
 
     /**
      * Method that sets the output file for the encryption or decryption
-     *
-     * @param filePath (Path of file)
      */
-    public void setOutFile(String filePath)
+    public File getInFile()
     {
-        outFile = new File(filePath);
-        outFile.getParentFile().mkdirs();
+        return inFile;
     }
 
     /**

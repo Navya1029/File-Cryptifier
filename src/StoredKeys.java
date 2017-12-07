@@ -16,7 +16,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * @Authors Tyler, Matt, Daniel
- * @Date_Updated 11/20/17
+ * @Date_Updated 11/29/17
  * @Model_Used Singleton
  * 
  * This is a class used to keep track of the keys. This will make it so the encryption and decryption classes
@@ -24,11 +24,13 @@ import java.security.spec.X509EncodedKeySpec;
  */
 public class StoredKeys
 {
+	//----------Initial Variables----------//
 	private static StoredKeys instance;
 
 	private SecretKeySpec SymmetricKey;
 	private PublicKey publicKey;
 	private PrivateKey privateKey;
+	//----------Initial Variables----------//
 	
 	/*
 	 * Only want one instance of it so the constructor is private.
@@ -42,7 +44,7 @@ public class StoredKeys
 		return instance;
 	}
 	
-	//--------------------------------SETTERS--------------------------------------
+	//--------------------------------SETTERS--------------------------------------//
 	public void setSymmetricKey(String key) throws UnsupportedEncodingException
 	{
 
@@ -58,9 +60,9 @@ public class StoredKeys
 	{
 		this.privateKey = key;
 	}
-	//--------------------------------SETTERS--------------------------------------
+	//--------------------------------SETTERS--------------------------------------//
 	
-	//--------------------------------GETTERS--------------------------------------
+	//--------------------------------GETTERS--------------------------------------//
 	public SecretKeySpec getSymmetricKey()
 	{
 		return SymmetricKey;
@@ -75,7 +77,7 @@ public class StoredKeys
 	{
 		return privateKey;
 	}
-	//--------------------------------GETTERS--------------------------------------
+	//--------------------------------GETTERS--------------------------------------//
 
 	/**
 	 * This method makes sure that the symmetric key is valid
@@ -97,7 +99,7 @@ public class StoredKeys
 		return s.substring(0, length).getBytes("UTF-8");
 	}
 
-	/*
+	/**
 	 * This method generates the public and private keys needed for Asymmetric Encryption and Decryption.
 	 */
 	public void generatePublicPrivateKeys() throws NoSuchAlgorithmException
@@ -109,7 +111,6 @@ public class StoredKeys
 
 		//Makes the key pair
 		KeyPair kp = kpg.generateKeyPair();
-		System.out.println("Keys generated");
 
 		//Saves the public and private keys to be used for encryption and decryption
 		publicKey = kp.getPublic();
@@ -126,10 +127,14 @@ public class StoredKeys
 		{
 			System.err.println(e.getMessage());
 		}
-
 	}
 
-	//Function that saves the keys to a file so they can be used another time
+	/**
+	 * Function that saves the keys to a file so they can be used another time
+	 * @param path Location of file to write to
+	 * @param key Key that needs to be written to file
+	 * @throws IOException
+	 */
 	public void writeToFile(String path, byte[] key) throws IOException
 	{
 		File f = new File(path);
@@ -140,28 +145,36 @@ public class StoredKeys
 		fos.flush();
 		fos.close();
 	}
-	
-	//Function that gets the private key from a file specified
+
+	/**
+	 * Function that gets the private key from a file specified
+	 * @param filename File name of where key is stored
+	 * @return Private Key
+	 * @throws Exception
+	 */
 	public PrivateKey getPrivateFromFile(String filename) throws Exception
 	{
 		byte[] keyBytes = Files.readAllBytes(new File(filename).toPath());
 		PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
 		KeyFactory kf = KeyFactory.getInstance("RSA");
 
-		System.out.println("Got private key");
-
 		return kf.generatePrivate(spec);
 	}
 
-	//Function taht gets the public key from a file specified
+	/**
+	 * Function taht gets the public key from a file specified
+	 * @param filename File name of where key is stored
+	 * @return Public Key
+	 * @throws Exception
+	 */
 	public PublicKey getPublicFromFile(String filename) throws Exception
 	{
 		byte[] keyBytes = Files.readAllBytes(new File(filename).toPath());
 		X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
 		KeyFactory kf = KeyFactory.getInstance("RSA");
 
-		System.out.println("Got public key");
-
 		return kf.generatePublic(spec);
 	}
 }
+
+

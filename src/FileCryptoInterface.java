@@ -2,7 +2,7 @@ import java.io.File;
 
 /**
  * @Authors Tyler, Matt, Daniel
- * @Date_Updated 11/1/17
+ * @Date_Updated 11/28/17
  * @Model_Used Strategy
  *
  * This interface lays out our Strategy Pattern for file encryption and decryption.

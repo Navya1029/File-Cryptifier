@@ -13,7 +13,7 @@ import sun.misc.BASE64Decoder;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/20/17
+ * @Date Updated: 11/29/17
  * @Model_Used: Strategy
  *
  * This is used for Symmetric Key. The plan is to have the user be able to choose what type of encryption / decryption
@@ -21,11 +21,24 @@ import sun.misc.BASE64Decoder;
  */
 public class SymmetricKey implements FileCryptoInterface
 {
-
+	/**
+	 * This method encrypts the file given to it and stores the file in a set location
+	 * @param file (File that needs to be encrypted)
+	 * @param algorithm (Not currently used)
+	 * @param keys (Object that contains the keys)
+	 * @return Encrypted File (In case we want to open it up for the user)
+	 */
     @Override
     public File fileEncryptor(File file, String algorithm, StoredKeys keys)
     {
-		File tempFile = new File("Messages/AES-Encrypted");
+    	//This is to get the input file so we can save the output file in the same directory with a different name
+		String fileName = file.getPath();
+		int ext = fileName.lastIndexOf(".");
+
+		File tempFile = new File("Messages/Encrypted-AES" + fileName.substring(ext));
+
+		//This makes the directory so the file can be stored
+		tempFile.getParentFile().mkdirs();
 
 		try
 		{
@@ -49,10 +62,24 @@ public class SymmetricKey implements FileCryptoInterface
         return tempFile;
     }
 
+	/**
+	 * This method decrypts the file given to it and stores the file in a set location
+	 * @param file (File that needs to be decrypted)
+	 * @param algorithm (Not currently used)
+	 * @param keys (Object that contains the keys)
+	 * @return Decrypted File (In case we want to open it up for the user)
+	 */
     @Override
     public File fileDecryptor(File file, String algorithm, StoredKeys keys)
     {
-		File tempFile = new File("Messages/AES-Decrypted");
+		//This is to get the input file so we can save the output file in the same directory with a different name
+		String fileName = file.getPath();
+		int ext = fileName.lastIndexOf(".");
+
+		File tempFile = new File("Messages/Decrypted-AES" + fileName.substring(ext));
+
+		//This makes the directory so the file can be stored
+		tempFile.getParentFile().mkdirs();
 
 		try
 		{

@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @Authors: Tyler, Matt, Daniel
- * @Date Updated: 11/20/17
+ * @Date Updated: 11/29/17
  * @Model_Used: Model-View-Controller
  *
  * The controller interprets the mouse and keyboard inputs from the user,
@@ -11,24 +11,30 @@ import java.awt.event.ActionListener;
  */
 public class CryptController
 {
+    //----------Initial Variables----------//
     private CryptModel model;
     private CryptView   view;
-    ComponentListener listener = new ComponentListener();
+    private ComponentListener listener = new ComponentListener();
+    //----------Initial Variables----------//
 
-
+    /**
+     * This starts up the program
+     * @param args
+     */
     public static void main(String[] args)
     {
         new CryptController();
     }
 
+    /**
+     * Method that adds the listeners to the view as this controls the MVC
+     */
     public void addListeners()
     {
         view.asymmetric.addActionListener(listener);
         view.symmetric.addActionListener(listener);
         view.inputChooserButton.addActionListener(listener);
         view.inputFileChooser.addActionListener(listener);
-        view.outputChooserButton.addActionListener(listener);
-        view.outputFileChooser.addActionListener(listener);
         view.symmetricKey.addActionListener(listener);
         view.symmetricButton.addActionListener(listener);
         view.generateKeys.addActionListener(listener);
@@ -38,7 +44,6 @@ public class CryptController
         view.privateKeyChooser.addActionListener(listener);
         view.encrypt.addActionListener(listener);
         view.decrypt.addActionListener(listener);
-
     }
 
     /**
@@ -60,6 +65,9 @@ public class CryptController
         view.update();
     }
 
+    /**
+     * This class that is listening for user input
+     */
     class ComponentListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -85,22 +93,12 @@ public class CryptController
                 model.setWindowToUse("In File Chooser");
                 updateView();
             }
-            else if(e.getSource() == view.outputChooserButton) //Output File Chooser Button
-            {
-                model.setWindowToUse("Out File");
-                updateView();
-            }
-            else if(e.getSource() == view.outputFileChooser) //Output File Chooser
-            {
-                model.setWindowToUse("Out File Chooser");
-                updateView();
-            }
             else if(e.getSource() == view.symmetricButton)
             {
                 model.setWindowToUse("Symmetric Button");
                 updateView();
             }
-            else if(e.getSource() == view.generateKeys)//Generate keys button
+            else if(e.getSource() == view.generateKeys) //Generate keys button
             {
                 model.setWindowToUse("Generate Keys:");
                 updateView();
@@ -125,19 +123,17 @@ public class CryptController
                 model.setWindowToUse("Private Key Chooser");
                 updateView();
             }
-            else if(e.getSource() == view.encrypt)
+            else if(e.getSource() == view.encrypt) //Encrypt Button
             {
                 model.setWindowToUse("Encrypt Button");
                 updateView();
             }
-            else if(e.getSource() == view.decrypt)
+            else if(e.getSource() == view.decrypt) //Decrypt Button
             {
                 model.setWindowToUse("Decrypt Button");
                 updateView();
             }
-
         }
     }
-
 }
 
